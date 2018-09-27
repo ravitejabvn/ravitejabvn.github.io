@@ -3,8 +3,6 @@ var colSize = prompt("Please enter coloumn size");
 var autoStarted = false;
 var intervalId;
 
-var stomp = document.querySelector('#stomp');
-
 document.querySelector('#mushroomsLeft').innerHTML = rowSize;
 //hv:  0 horizontal movement
 //hv:  1 vertical movement
@@ -142,7 +140,6 @@ function moveMario(){
     if(isUpdated){
         document.querySelector('[data-indeces="'+indeces+'"]').removeAttribute('class');
         document.querySelector('#mushroomsLeft').innerHTML = marioStatus.mushroomsLeft;
-        stomp.play();
     }
 
     document.querySelector('#marioMoves').innerHTML = marioStatus.moves;
