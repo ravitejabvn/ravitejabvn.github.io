@@ -7,21 +7,6 @@ var intervalId;
 var directionKey;
 
 document.querySelector('#mushroomsLeft').innerHTML = rowSize;
-//hv:  0 horizontal movement
-//hv:  1 vertical movement
-// rl : 0 left
-// rl : 1 right
-
-//hv rl: 00 -- moves right
-//hv rl: 01 -- moves left
-//hv rl: 10 -- moves top
-//hv rl: 11 -- moves bottom
-
-
-var marioDirections = {
-    hv: '0',
-    rl: '1'
-};
 
 var marioStatus = {
     currentPos: [0, 0],
@@ -35,7 +20,7 @@ var marioStatus = {
             this.currentPos[1] += 1;
             return true;
         } else {
-            marioDirections.rl = 0;
+            directionKey = 37;
             return false;
         }
     },
@@ -44,7 +29,7 @@ var marioStatus = {
             this.currentPos[1] -= 1;
             return true;
         } else {
-            marioDirections.rl = 1;
+            directionKey = 39;
             return false;
         }
     },
@@ -53,7 +38,7 @@ var marioStatus = {
             this.currentPos[0] -= 1;
             return true;
         } else {
-            marioDirections.rl = 1;
+            directionKey = 40;
             return false;
         }
     },
@@ -62,7 +47,7 @@ var marioStatus = {
             this.currentPos[0] += 1;
             return true;
         } else {
-            marioDirections.rl = 0;
+            directionKey = 38;
             return false;
         }
     },
@@ -81,30 +66,8 @@ var marioStatus = {
 document.onkeydown = function(e) {
     var key = e.keyCode;
     directionKey = key;
-    // switch(key) {
-    //     case 37: 
-    //         marioDirections.hv = 0;
-    //         marioDirections.rl = 0;
-
-    //     break;
-    //     case 38: 
-    //         marioDirections.hv = 1;
-    //         marioDirections.rl = 0
-    //     break;
-    //     case 39: 
-    //         marioDirections.hv = 0;
-    //         marioDirections.rl = 1;
-    //     break;
-    //     case 40: 
-    //         marioDirections.hv = 1;
-    //         marioDirections.rl = 1;
-    //     break;
-    // }
-
     triggerAuto();
     autoStarted = true;
-    
-    
 }
 
 function triggerAuto(){
@@ -113,25 +76,23 @@ function triggerAuto(){
     }
 }
 
-var directions = {
-    left: marioStatus.moveLeft(),
-    up: marioStatus.moveUp(),
-    right: marioStatus.moveRight(),
-    down: marioStatus.moveDown()
-}
-
 
 function autoMoveMario() {
-    directions.right;
-    // if(marioDirections.hv == 0 && marioDirections.rl == 0){
-    //     marioStatus.moveLeft();
-    // } else if(marioDirections.hv == 0 && marioDirections.rl == 1) {
-    //     marioStatus.moveRight();
-    // } else if(marioDirections.hv == 1 && marioDirections.rl == 0) {
-    //     marioStatus.moveUp();
-    // } else if(marioDirections.hv == 1 && marioDirections.rl == 1) {
-    //     marioStatus.moveDown();
-    // }
+    switch(directionKey){
+        case 37:
+            marioStatus.moveLeft();
+            break;
+        case 38:
+            marioStatus.moveUp();
+            break;
+        case 39:
+            marioStatus.moveRight();
+            break;
+        case 40:
+            marioStatus.moveDown();
+            break;
+        
+    }
     moveMario();
 }
 
