@@ -1,7 +1,10 @@
 var rowSize = prompt("Please enter row size");
 var colSize = prompt("Please enter coloumn size");
+window.focus();
 var autoStarted = false;
 var intervalId;
+
+var directionKey;
 
 document.querySelector('#mushroomsLeft').innerHTML = rowSize;
 //hv:  0 horizontal movement
@@ -77,25 +80,26 @@ var marioStatus = {
 
 document.onkeydown = function(e) {
     var key = e.keyCode;
-    switch(key) {
-        case 37: 
-            marioDirections.hv = 0;
-            marioDirections.rl = 0;
+    directionKey = key;
+    // switch(key) {
+    //     case 37: 
+    //         marioDirections.hv = 0;
+    //         marioDirections.rl = 0;
 
-        break;
-        case 38: 
-            marioDirections.hv = 1;
-            marioDirections.rl = 0
-        break;
-        case 39: 
-            marioDirections.hv = 0;
-            marioDirections.rl = 1;
-        break;
-        case 40: 
-            marioDirections.hv = 1;
-            marioDirections.rl = 1;
-        break;
-    }
+    //     break;
+    //     case 38: 
+    //         marioDirections.hv = 1;
+    //         marioDirections.rl = 0
+    //     break;
+    //     case 39: 
+    //         marioDirections.hv = 0;
+    //         marioDirections.rl = 1;
+    //     break;
+    //     case 40: 
+    //         marioDirections.hv = 1;
+    //         marioDirections.rl = 1;
+    //     break;
+    // }
 
     triggerAuto();
     autoStarted = true;
@@ -109,18 +113,25 @@ function triggerAuto(){
     }
 }
 
+var directions = {
+    left: marioStatus.moveLeft(),
+    up: marioStatus.moveUp(),
+    right: marioStatus.moveRight(),
+    down: marioStatus.moveDown()
+}
 
 
 function autoMoveMario() {
-    if(marioDirections.hv == 0 && marioDirections.rl == 0){
-        marioStatus.moveLeft();
-    } else if(marioDirections.hv == 0 && marioDirections.rl == 1) {
-        marioStatus.moveRight();
-    } else if(marioDirections.hv == 1 && marioDirections.rl == 0) {
-        marioStatus.moveUp();
-    } else if(marioDirections.hv == 1 && marioDirections.rl == 1) {
-        marioStatus.moveDown();
-    }
+    directions.right;
+    // if(marioDirections.hv == 0 && marioDirections.rl == 0){
+    //     marioStatus.moveLeft();
+    // } else if(marioDirections.hv == 0 && marioDirections.rl == 1) {
+    //     marioStatus.moveRight();
+    // } else if(marioDirections.hv == 1 && marioDirections.rl == 0) {
+    //     marioStatus.moveUp();
+    // } else if(marioDirections.hv == 1 && marioDirections.rl == 1) {
+    //     marioStatus.moveDown();
+    // }
     moveMario();
 }
 
@@ -145,7 +156,7 @@ function moveMario(){
     document.querySelector('#marioMoves').innerHTML = marioStatus.moves;
 
     if(marioStatus.mushroomsLeft == 0){
-        alert("hurry, ate all the mushrooms");
+        setTimeout(() => {alert("hurry, ate all the mushrooms")},300);
         clearInterval(intervalId);
     }
 }
